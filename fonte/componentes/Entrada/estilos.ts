@@ -10,6 +10,6 @@ export const estilos = StyleSheet.create({
 		flex: 1,
 		marginRight: 5,
 		color: "#FFF",
-		fontSize: 18
+		fontSize: 16
 	},
 });
