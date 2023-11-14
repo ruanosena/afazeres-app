@@ -1,6 +1,6 @@
 import { Alert, View } from "react-native";
 import Marca from "../../componentes/Marca";
-import { estilos } from "./estilos";
+import { AfazeresConteiner, FormularioConteiner, ListaConteiner } from "./estilos";
 import Entrada from "../../componentes/Entrada";
 import BotaoRedondo from "../../componentes/Botao";
 import BarraInfo from "../../componentes/BarraInfo";
@@ -16,7 +16,7 @@ export default function Inicio() {
 		if (afazeres.find((a) => a.nome == afazer)) {
 			return Alert.alert("Afazer existente", "Já existe um afazer com esse nome.");
 		}
-		defAfazeres((a) => [...a, { nome: afazer, concluido: false }]);
+		defAfazeres((a) => [...a, { nome: afazer, concluido: false }].sort((a) => a.concluido ? 1 : -1));
 		defAfazer("");
 	}
 	function aoRemoverTarefa(indice: number) {
@@ -41,16 +41,23 @@ export default function Inicio() {
 	}
 
 	return (
-		<View style={estilos.afazeres}>
+		<AfazeresConteiner>
 			<Marca />
-			<View style={estilos.formulario}>
+			<FormularioConteiner>
 				<Entrada placeholder="Adicione uma nova tarefa" onChangeText={defAfazer} value={afazer} />
 				<BotaoRedondo onPress={aoAdicionarTarefa}>+</BotaoRedondo>
-			</View>
-			<View style={estilos.lista}>
-				<BarraInfo criadas={afazeres.length} concluidas={afazeres.filter((a) => a.concluido).length} />
-				<ListaAfazeres dados={afazeres} aoRemoverTarefa={aoRemoverTarefa} aoConcluirTarefa={lidarConcluirTarefa} />
-			</View>
-		</View>
+			</FormularioConteiner>
+			<ListaConteiner>
+				<BarraInfo
+					criadas={afazeres.filter((a) => !a.concluido).length}
+					concluidas={afazeres.filter((a) => a.concluido).length}
+				/>
+				<ListaAfazeres
+					dados={afazeres}
+					aoRemoverTarefa={aoRemoverTarefa}
+					aoConcluirTarefa={lidarConcluirTarefa}
+				/>
+			</ListaConteiner>
+		</AfazeresConteiner>
 	);
 }

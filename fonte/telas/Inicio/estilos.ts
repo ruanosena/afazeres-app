@@ -1,19 +1,20 @@
 import { StyleSheet } from "react-native";
+import styled from "styled-components/native";
 
-export const estilos = StyleSheet.create({
-	afazeres: {
-		flex: 1,
-		width: "100%",
-		backgroundColor: "#1A1A1A",
-	},
-	formulario: {
-		width: "100%",
-		paddingHorizontal: 24,
-		marginTop: -32,
-		flexDirection: "row",
-	},
-	lista: {
-		paddingHorizontal: 24,
-		marginTop: 32,
-	},
-});
+export const AfazeresConteiner = styled.View`
+	flex: 1;
+	width: 100%;
+	background-color: #1a1a1a;
+`
+export const FormularioConteiner = styled.View`
+	width: 100%;
+	padding-left: 24px;
+	padding-right: 24px;
+	margin-top: -32px;
+	flex-direction: row;
+`;
+export const ListaConteiner = styled.View`
+	padding-left: 24px;
+	padding-right: 24px;
+	margin-top: 32px;
+`;
