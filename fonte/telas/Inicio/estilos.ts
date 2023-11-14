@@ -1,5 +1,11 @@
 import styled from "styled-components/native";
 
+export const Conteiner = styled.View`
+	flex: 1;
+	background-color: ${({ theme }) => theme.CORES.GRAY_100};
+	align-items: center;
+	justify-content: flex-start;
+`;
 export const AfazeresConteiner = styled.View`
 	flex: 1;
 	width: 100%;
