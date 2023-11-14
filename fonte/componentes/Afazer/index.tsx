@@ -14,7 +14,7 @@ export default function Afazer({ nome, concluido, aoRemover, aoConcluir, ...rest
 			<Switch onValueChange={aoConcluir} value={concluido} />
 			<Text style={estilos.cartaoTextoConcluido}>{nome}</Text>
 			<TouchableOpacity style={estilos.cartaoBotao} onPress={aoRemover}>
-				<Image source={require("../../../assets/trash.png")}></Image>
+				<Image source={require("@esp/trash.png")}></Image>
 			</TouchableOpacity>
 		</View>
 	) : (
@@ -22,7 +22,7 @@ export default function Afazer({ nome, concluido, aoRemover, aoConcluir, ...rest
 			<Switch onValueChange={aoConcluir} value={concluido} />
 			<Text style={estilos.cartaoTexto}>{nome}</Text>
 			<TouchableOpacity style={estilos.cartaoBotao} onPress={aoRemover}>
-				<Image source={require("../../../assets/trash.png")}></Image>
+				<Image source={require("@esp/trash.png")}></Image>
 			</TouchableOpacity>
 		</View>
 	);
