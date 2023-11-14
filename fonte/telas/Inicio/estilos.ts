@@ -1,11 +1,10 @@
-import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 
 export const AfazeresConteiner = styled.View`
 	flex: 1;
 	width: 100%;
-	background-color: #1a1a1a;
-`
+	background-color: ${({ theme }) => theme.CORES.GRAY_600};
+`;
 export const FormularioConteiner = styled.View`
 	width: 100%;
 	padding-left: 24px;

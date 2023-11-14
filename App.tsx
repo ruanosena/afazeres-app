@@ -1,12 +1,16 @@
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StyleSheet, View, StatusBar } from "react-native";
 import Inicio from "./fonte/telas/Inicio";
+import { ThemeProvider } from "styled-components/native";
+import tema from "./fonte/tema";
 
 export default function App() {
 	return (
-		<View style={styles.container}>
-			<Inicio />
-			<StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
-		</View>
+		<ThemeProvider theme={tema}>
+			<View style={styles.container}>
+				<Inicio />
+				<StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
+			</View>
+		</ThemeProvider>
 	);
 }
 

@@ -1,5 +1,5 @@
-import { Image, Switch, Text, TouchableOpacity, View, ViewProps } from "react-native";
-import { estilos } from "./estilos";
+import { Image, ViewProps } from "react-native";
+import { AfazerCartao, CartaoBotao, CartaoConcluidoTexto, CartaoSwitch, CartaoTexto } from "./estilos";
 import { AfazerTipo } from "../../tipagens";
 
 type AfazerProps = ViewProps &
@@ -10,20 +10,20 @@ type AfazerProps = ViewProps &
 
 export default function Afazer({ nome, concluido, aoRemover, aoConcluir, ...rest }: AfazerProps) {
 	return concluido ? (
-		<View style={estilos.afazerCartao} {...rest}>
-			<Switch onValueChange={aoConcluir} value={concluido} />
-			<Text style={estilos.cartaoTextoConcluido}>{nome}</Text>
-			<TouchableOpacity style={estilos.cartaoBotao} onPress={aoRemover}>
+		<AfazerCartao {...rest}>
+			<CartaoSwitch onValueChange={aoConcluir} value={concluido} />
+			<CartaoConcluidoTexto>{nome}</CartaoConcluidoTexto>
+			<CartaoBotao onPress={aoRemover}>
 				<Image source={require("@esp/trash.png")}></Image>
-			</TouchableOpacity>
-		</View>
+			</CartaoBotao>
+		</AfazerCartao>
 	) : (
-		<View style={estilos.afazerCartao} {...rest}>
-			<Switch onValueChange={aoConcluir} value={concluido} />
-			<Text style={estilos.cartaoTexto}>{nome}</Text>
-			<TouchableOpacity style={estilos.cartaoBotao} onPress={aoRemover}>
+		<AfazerCartao {...rest}>
+			<CartaoSwitch onValueChange={aoConcluir} value={concluido} />
+			<CartaoTexto>{nome}</CartaoTexto>
+			<CartaoBotao onPress={aoRemover}>
 				<Image source={require("@esp/trash.png")}></Image>
-			</TouchableOpacity>
-		</View>
+			</CartaoBotao>
+		</AfazerCartao>
 	);
 }
