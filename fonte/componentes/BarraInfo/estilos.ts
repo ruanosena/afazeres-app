@@ -18,10 +18,13 @@ export const estilos = StyleSheet.create({
 		fontWeight: "bold",
 	},
 	distintivo: {
-		color: "#D9D9D9",
 		backgroundColor: "#333333",
 		borderRadius: 8,
 		paddingHorizontal: 4,
-    marginLeft: 4
+		marginLeft: 4,
 	},
+	distintivoTexto: {
+		color: "#D9D9D9",
+		textAlignVertical: "center",
+	}
 });

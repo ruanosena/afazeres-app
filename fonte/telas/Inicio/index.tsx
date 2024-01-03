@@ -1,28 +1,42 @@
-import { Alert, View } from "react-native";
+import { Alert, FlatList, Image } from "react-native";
 import Marca from "../../componentes/Marca";
-import { AfazeresConteiner, Conteiner, FormularioConteiner, ListaConteiner } from "./estilos";
+import {
+	Conteudo,
+	Conteiner,
+	FormularioConteiner,
+	ListaConteiner,
+	ListaVazia,
+	ListaVaziaTexto,
+	ListaVaziaTitulo,
+} from "./estilos";
 import Entrada from "../../componentes/Entrada";
 import BotaoRedondo from "../../componentes/Botao";
 import BarraInfo from "../../componentes/BarraInfo";
-import ListaAfazeres from "../../componentes/ListaAfazeres";
 import { useState } from "react";
-import { AfazerTipo } from "../../tipagens";
+import { ITarefa } from "../../tipagens";
+import Tarefa from "../../componentes/Tarefa";
 
 export default function Inicio() {
-	const [afazeres, defAfazeres] = useState<AfazerTipo[]>([]);
-	const [afazer, defAfazer] = useState<string>("");
+	const [listaTarefas, defListaTarefas] = useState<ITarefa[]>([]);
+	const [tarefa, defTarefa] = useState<string>("");
 
 	function aoAdicionarTarefa() {
-		if (afazeres.find((a) => a.nome == afazer)) {
-			return Alert.alert("Afazer existente", "Já existe um afazer com esse nome.");
+		if (listaTarefas.find((t) => t.nome == tarefa)) {
+			return Alert.alert("Tarefa existente", "Já existe uma tarefa com esse nome.");
 		}
-		defAfazeres((a) =>
-			[...a, { nome: afazer, concluido: false }].sort((a) => (a.concluido ? 1 : -1))
-		);
-		defAfazer("");
+		defListaTarefas((tarefas) => [
+			...tarefas,
+			{ nome: tarefa, concluido: false, criado_em: new Date() },
+		]);
+		defTarefa("");
+	}
+	function aoConcluirTarefa(indice: number) {
+		const novaLista = [...listaTarefas];
+		novaLista[indice].concluido = !novaLista[indice].concluido;
+		defListaTarefas(novaLista);
 	}
 	function aoRemoverTarefa(indice: number) {
-		Alert.alert("Remover tarefa", `Você deseja mesmo apagar ${afazeres[indice].nome}?`, [
+		Alert.alert("Remover tarefa", `Você deseja mesmo apagar ${listaTarefas[indice].nome}?`, [
 			{
 				text: "Não",
 				style: "cancel",
@@ -30,38 +44,53 @@ export default function Inicio() {
 			{
 				text: "Sim",
 				onPress() {
-					defAfazeres((a) => a.filter((_, i) => i != indice));
+					defListaTarefas((a) => a.filter((_, i) => i != indice));
 				},
 			},
 		]);
 	}
-	function lidarConcluirTarefa(indice: number) {
-		defAfazeres((a) => {
-			a[indice].concluido = !a[indice].concluido;
-			return [...a];
-		});
-	}
 
 	return (
 		<Conteiner>
-			<AfazeresConteiner>
+			<Conteudo>
 				<Marca />
 				<FormularioConteiner>
-					<Entrada placeholder="Adicione uma nova tarefa" onChangeText={defAfazer} value={afazer} />
+					<Entrada
+						placeholder="Adicione uma nova tarefa"
+						onChangeText={defTarefa}
+						value={tarefa}
+						onSubmitEditing={aoAdicionarTarefa}
+						returnKeyType="send"
+					/>
 					<BotaoRedondo onPress={aoAdicionarTarefa}>+</BotaoRedondo>
 				</FormularioConteiner>
 				<ListaConteiner>
 					<BarraInfo
-						criadas={afazeres.filter((a) => !a.concluido).length}
-						concluidas={afazeres.filter((a) => a.concluido).length}
+						criadas={listaTarefas.filter((t) => !t.concluido).length}
+						concluidas={listaTarefas.filter((t) => t.concluido).length}
 					/>
-					<ListaAfazeres
-						dados={afazeres}
-						aoRemoverTarefa={aoRemoverTarefa}
-						aoConcluirTarefa={lidarConcluirTarefa}
+					<FlatList
+						data={listaTarefas
+							.sort((t1, t2) => t1.criado_em.valueOf() - t2.criado_em.valueOf())
+							.sort((t1, t2) => (t1.concluido ? 1 : t2.concluido ? -1 : 0))}
+						keyExtractor={(_, indice) => `tarefa-${indice}`}
+						renderItem={({ item, index }) => (
+							<Tarefa
+								{...item}
+								aoRemover={() => aoRemoverTarefa(index)}
+								aoConcluir={() => aoConcluirTarefa(index)}
+							/>
+						)}
+						ListEmptyComponent={
+							<ListaVazia>
+								<Image source={require("../../../assets/Clipboard.png")} />
+								<ListaVaziaTitulo>Você ainda não tem tarefas cadastradas</ListaVaziaTitulo>
+								<ListaVaziaTexto>Crie tarefas e organize seus itens a fazer</ListaVaziaTexto>
+							</ListaVazia>
+						}
 					/>
 				</ListaConteiner>
-			</AfazeresConteiner>
+			</Conteudo>
 		</Conteiner>
 	);
 }

@@ -11,12 +11,18 @@ export default function BarraInfo({ criadas, concluidas }: BarraInfoProps) {
 		<View style={estilos.barra}>
 			<View>
 				<Text style={estilos.textoPrimario}>
-					Criadas <Text style={estilos.distintivo}>{criadas}</Text>
+					Criadas{" "}
+					<View style={estilos.distintivo}>
+						<Text style={estilos.distintivoTexto}>{criadas}</Text>
+					</View>
 				</Text>
 			</View>
 			<View>
 				<Text style={estilos.textoSecundario}>
-					Concluídas <Text style={estilos.distintivo}>{concluidas}</Text>
+					Concluídas{" "}
+					<View style={estilos.distintivo}>
+						<Text style={estilos.distintivoTexto}>{concluidas}</Text>
+					</View>
 				</Text>
 			</View>
 		</View>

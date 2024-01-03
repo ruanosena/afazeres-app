@@ -1,5 +1,5 @@
-import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
-import { estilos } from "./estilos";
+import { TouchableOpacityProps } from "react-native";
+import { Conteiner, Conteudo, Texto } from "./estilos";
 import { ReactNode } from "react";
 
 type BotaoProps = TouchableOpacityProps & {
@@ -8,8 +8,10 @@ type BotaoProps = TouchableOpacityProps & {
 
 export default function BotaoRedondo({ children, ...rest }: BotaoProps) {
 	return (
-		<TouchableOpacity style={estilos.botao} {...rest}>
-			<Text style={estilos.botaoTexto}>{children}</Text>
-		</TouchableOpacity>
+		<Conteiner {...rest}>
+			<Conteudo>
+				<Texto>{children}</Texto>
+			</Conteudo>
+		</Conteiner>
 	);
 }
