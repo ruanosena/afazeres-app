@@ -21,14 +21,17 @@ export default function Inicio() {
 	const [tarefa, defTarefa] = useState<string>("");
 
 	function aoAdicionarTarefa() {
-		if (listaTarefas.find((t) => t.nome == tarefa)) {
-			return Alert.alert("Tarefa existente", "Já existe uma tarefa com esse nome.");
+		const novaTarefa = tarefa.trim();
+		if (novaTarefa.length) {
+			if (listaTarefas.find((t) => t.nome == novaTarefa)) {
+				return Alert.alert("Tarefa existente", "Já existe uma tarefa com esse nome.");
+			}
+			defListaTarefas((tarefas) => [
+				...tarefas,
+				{ nome: novaTarefa, concluido: false, criado_em: new Date() },
+			]);
+			defTarefa("");
 		}
-		defListaTarefas((tarefas) => [
-			...tarefas,
-			{ nome: tarefa, concluido: false, criado_em: new Date() },
-		]);
-		defTarefa("");
 	}
 	function aoConcluirTarefa(indice: number) {
 		const novaLista = [...listaTarefas];

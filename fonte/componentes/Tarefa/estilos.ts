@@ -19,28 +19,30 @@ export const BotaoIcone = styled(MaterialCommunityIcons).attrs(({ theme }) => ({
 	size: 24,
 	color: theme.CORES.BLUE,
 }))``;
-export const BotaoIconeTerminado = styled(MaterialCommunityIcons).attrs(
-	({ theme }) => ({
-		size: 24,
-		color: theme.CORES.PURPLE_DARK,
-	})
-)``;
-export const CartaoSwitch = styled.Switch.attrs(({ theme }) => ({
-	trackColor: { true: theme.CORES.BLUE_DARK },
-	thumbColor: theme.CORES.BLUE,
+export const BotaoIconeTerminado = styled(MaterialCommunityIcons).attrs(({ theme }) => ({
+	size: 24,
+	color: theme.CORES.PURPLE_DARK,
 }))``;
-export const Texto = styled.Text`
+export const Conteudo = styled.View`
 	flex: 1;
-	color: ${({ theme }) => theme.CORES.GRAY_100};
 	padding-left: 8px;
 	padding-right: 8px;
 `;
-export const TextoConcluido = styled.Text`
-	flex: 1;
+export const DataEHora = styled.Text`
 	color: ${({ theme }) => theme.CORES.GRAY_300};
+	font-size: ${({ theme }) => theme.FONTE_TAMANHO.PQ}px;
+	font-family: ${({ theme }) => theme.FONTE_FAMILIA.REGULAR};
+`;
+export const Texto = styled.Text`
+	color: ${({ theme }) => theme.CORES.GRAY_100};
+	font-size: ${({ theme }) => theme.FONTE_TAMANHO.G}px;
+	font-family: ${({ theme }) => theme.FONTE_FAMILIA.BOLD};
+`;
+export const TextoConcluido = styled.Text`
+	color: ${({ theme }) => theme.CORES.GRAY_300};
+	font-size: ${({ theme }) => theme.FONTE_TAMANHO.G}px;
 	text-decoration-line: line-through;
-	padding-left: 8px;
-	padding-right: 8px;
+	font-family: ${({ theme }) => theme.FONTE_FAMILIA.BOLD};
 `;
 export const BotaoRemover = styled.TouchableOpacity`
 	width: 58px;

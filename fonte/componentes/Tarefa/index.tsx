@@ -7,6 +7,8 @@ import {
 	Botao,
 	BotaoIcone,
 	BotaoIconeTerminado,
+	Conteudo,
+	DataEHora,
 } from "./estilos";
 import { ITarefa } from "../../tipagens";
 import { useState } from "react";
@@ -34,7 +36,10 @@ export default function Tarefa({
 					<BotaoIcone name="circle-outline" />
 				)}
 			</Botao>
-			{concluido ? <TextoConcluido>{nome}</TextoConcluido> : <Texto>{nome}</Texto>}
+			<Conteudo>
+				{concluido ? <TextoConcluido>{nome}</TextoConcluido> : <Texto>{nome}</Texto>}
+				<DataEHora>{criado_em.toLocaleString()}</DataEHora>
+			</Conteudo>
 			<BotaoRemover onPress={aoRemover}>
 				<Image source={require("@esp/trash.png")}></Image>
 			</BotaoRemover>
